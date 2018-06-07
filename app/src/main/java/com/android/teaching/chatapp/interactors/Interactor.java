@@ -32,7 +32,7 @@ public class Interactor {
     public void getMessages(final InteractorCallback interactorCallback) {
 
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
