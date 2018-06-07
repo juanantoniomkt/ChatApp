@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.teaching.chatapp.models.MessageModel;
 import com.google.firebase.database.DatabaseReference;
@@ -31,11 +34,40 @@ public class NewMessageActivity extends AppCompatActivity {
 
     public void send(View view)
     {
-        TextView username = findViewById(R.id.usernameNew);
-        TextView text = findViewById(R.id.textNew);
+        EditText usernameEdit = findViewById(R.id.usernameNew);
+        EditText textEdit = findViewById(R.id.textNew);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("messages");
-        myRef.push().setValue(new MessageModel(username.getText().toString(), text.getText().toString()));
+        String username = usernameEdit.getText().toString();
+        String text = textEdit.getText().toString();
+
+        if(TextUtils.isEmpty(username) && TextUtils.isEmpty(text))
+        {
+            Toast.makeText(this,"todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+
+        }
+
+        else if(TextUtils.isEmpty(username))
+        {
+            Toast.makeText(this,"username es obligatorio", Toast.LENGTH_LONG).show();
+
+        }
+
+        else if(TextUtils.isEmpty(text))
+        {
+            Toast.makeText(this,"mensaje es obligatorio", Toast.LENGTH_LONG).show();
+        }
+
+        else
+        {
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("messages");
+            myRef.push().setValue(new MessageModel(usernameEdit.getText().toString(), textEdit.getText().toString()));
+
+
+            usernameEdit.setText("");
+            textEdit.setText("");
+        }
+
     }
 }
