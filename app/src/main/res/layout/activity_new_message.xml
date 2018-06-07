@@ -16,16 +16,23 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <EditText
+    <TextView
         android:layout_below="@+id/toolbarNew"
+        android:id="@+id/title_new_message"
+        android:text="@string/title_new_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_below="@+id/title_new_message"
         android:id="@+id/usernameNew"
         android:hint="username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
-        android:hint="message"
         android:layout_below="@+id/usernameNew"
+        android:hint="message"
         android:id="@+id/textNew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
